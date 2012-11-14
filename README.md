@@ -3,6 +3,14 @@
 ##API Endpoint
 [http://api.visas.io](http://api.visas.io)
 
+Resources are returned as JSON by default or if a .json extension is appended to the resource URI,   so these requests below are valid:
+
+<sub><sup>`/v1/forms/esta/applications?query=string`</sup></sub>  
+<sub><sup>`/v1/forms/esta/applications?query=string&format=xml`</sup></sub>  
+<sub><sup>`/v1/forms/esta/applications.xml?query=string`</sup></sub>  
+
+Available formats: JSON,  XML,  JSONP
+
 ##Summary of Resource URL Patterns
 /v1/forms/esta/applications   
 /v1/forms/esta/applications/{APPLICATION_NUMBER}   
@@ -15,12 +23,6 @@
 |`/applications/{APPLICATION_NUMBER}`         |[Get application data](#get-data)|X|[Update application](#update)|X|
 |`/applications/{APPLICATION_NUMBER}/payments`|[Get payment data](#get-data)|[Create a payment](#pay)|X|X|
 
-
-Resources are returned as JSON by default or if a .json extension is appended to the resource URI,  so these requests below are valid:  
-<sub><sup>`/v1/forms/esta/applications?query=string`</sup></sub>  
-<sub><sup>`/v1/forms/esta/applications?query=string&format=xml`</sup></sub>  
-<sub><sup>`/v1/forms/esta/applications.xml?query=string`</sup></sub>  
-Available formats: JSON, XML, JSONP  
 
 ##Authorization
 `username` & `api_key` are always required
@@ -135,9 +137,35 @@ Return
 **400 BAD REQUEST** - If the information being queried isn't valid, you will receive a 400 BAD REQUEST response.
 If a field sent is not correctly formatted, like incorrect date of birth, etc  
 
+```json
+{
+  "error":{ 
+    "msg":"incomplete parameters", 
+    "details":"missing passport_number", 
+    "code":5001
+  }
+}
+```
+
+```xml
+<?xml version='1.0' standalone='yes'?>
+<error code="5001" details="missing passport_number" msg="incomplete parameters" />
+```  
+
 OR
 
-**401 UNAUTHORIZED** - If you incorrectly specify your account credentials, you will receive a 401 UNAUTHORIZED response. This means you need to check that you have the correct Account SID and Auth Token specified.
+**401 UNAUTHORIZED** - If you incorrectly specify your account credentials, you will receive a 401 UNAUTHORIZED response. This means you need to check that you have the correct Account SID and Auth Token specified.  
+JSON  
+```json
+{"error":{"msg":"unauthorized", "details":"access denied"}}
+```
+
+XML  
+
+```xml
+<?xml version='1.0' standalone='yes'?> 
+<error details="access denied" msg="unauthorized" /> 
+```
 
 OR
 
