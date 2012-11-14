@@ -17,6 +17,7 @@
 
 
 Resources are returned as JSON by default or if a .json extension is appended to the resource URI, so these requests below are valid:
+
 `/v1/forms/esta/applications?query=string`
 `/v1/forms/esta/applications?query=string&format=xml`
 `/v1/forms/esta/applications.xml?query=string`
