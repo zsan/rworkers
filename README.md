@@ -16,6 +16,14 @@
 |`/applications/{APPLICATION_NUMBER}/payments`|[Get payment data](#get-data)|[Create a payment](#pay)|X|X|
 
 
+Resources are returned as JSON by default or if a .json extension is appended to the resource URI, so these requests below are valid:
+`/v1/forms/esta/applications?query=string`
+`/v1/forms/esta/applications?query=string&format=xml`
+`/v1/forms/esta/applications.xml?query=string`
+
+Available formats: JSON, XML, JSONP
+
+
 ##Authorization
 `username` & `api_key` are always required
 
